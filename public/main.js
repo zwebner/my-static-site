@@ -17,7 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify(newSubmission)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 alert("Submission successful.");
                 signupForm.reset();
@@ -63,7 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
         searchBar.addEventListener("input", filterSubmissions);
 
         fetch('/submissions')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(submissions => {
                 const tbody = adminPanel.querySelector("tbody");
                 tbody.innerHTML = ''; // Clear existing rows
