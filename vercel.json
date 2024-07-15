@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/submissions.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/api/submissions", "dest": "/api/submissions.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
+  ]
+}
